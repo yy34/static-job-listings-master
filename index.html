@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | Job Listings</title>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <header>
+        <div class="header-bg"></div>
+      </header>
+
+      <div class="container py-5">
+        <section>
+          <div v-if="filterItems.length > 0" class="job-filter-wrapper">
+            <div class="filter-items">
+              <span v-for="item in filterItems">
+                {{item}}
+                <i class="item-remove" @click="removeItem(item)"> </i>
+              </span>
+            </div>
+            <div @click="clearFilter" class="filter-clear">Clear</div>
+          </div>
+          <div
+            v-for="(data,index) in itemFiltered"
+            :key="index"
+            class="job-list-wrapper d-flex justify-content-between align-items-center mb-5"
+          >
+            <div class="job-list-detail d-flex">
+              <div class="job-list-img">
+                <img :src="data.logo" alt="photosnap" />
+              </div>
+
+              <div class="job-list detail-info">
+                <div class="detail-header d-flex align-items-center mb-2">
+                  <span class="title">{{data.company}}</span>
+                  <span v-if="data.new" class="new">New!</span>
+                  <span v-if="data.featured" class="featured"> featured </span>
+                </div>
+                <div class="detail-title mb-2">{{data.position}}</div>
+                <div class="detail-bottom">
+                  <span> {{data.postedAt}} </span>
+                  <span class="dot"></span>
+                  <span>{{data.contract}}</span>
+                  <span class="dot"></span>
+                  <span>{{data.location}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="job-skills">
+              <span
+                v-for="(skill,i) in data.languages"
+                :key="i"
+                @click="addFilter(skill)"
+                >{{skill}}</span
+              >
+              <span @click="addFilter(data.role)">{{data.role}}</span>
+              <span @click="addFilter(data.level)">{{data.level}}</span>
+              <span v-for="tool in data.tools" @click="addFilter(tool)"
+                >{{tool}}</span
+              >
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="attribution text-center">
+            Challenge by
+            <a
+              href="https://www.frontendmentor.io?ref=challenge"
+              target="_blank"
+              >Frontend Mentor</a
+            >. Coded by <a href="#">yy34</a>.
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
