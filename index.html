@@ -69,11 +69,12 @@
                 v-for="(skill,i) in data.languages"
                 :key="i"
                 @click="addFilter(skill)"
+                :data-languages="skill"
                 >{{skill}}</span
               >
-              <span @click="addFilter(data.role)">{{data.role}}</span>
-              <span @click="addFilter(data.level)">{{data.level}}</span>
-              <span v-for="tool in data.tools" @click="addFilter(tool)"
+              <span :data-role="data.role" @click="addFilter(data.role)">{{data.role}}</span>
+              <span :data-level="data.level" @click="addFilter(data.level)">{{data.level}}</span>
+              <span :data-tools="tool" v-for="tool in data.tools" @click="addFilter(tool)"
                 >{{tool}}</span
               >
             </div>
